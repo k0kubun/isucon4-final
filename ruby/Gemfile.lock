@@ -19,6 +19,8 @@ GEM
       thor (~> 0.19.1)
     kgio (2.9.2)
     mysql2 (0.3.16)
+    mysql2-cs-bind (0.0.6)
+      mysql2
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
@@ -45,7 +47,7 @@ PLATFORMS
 
 DEPENDENCIES
   foreman
-  mysql2
+  mysql2-cs-bind
   rack-lineprof!
   redis
   sinatra
