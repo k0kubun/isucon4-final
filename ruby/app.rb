@@ -118,16 +118,25 @@ module Isucon4
       end
 
       def get_log(id)
-        path = LOG_DIR.join(id.split('/').last)
-        return {} unless path.exist?
+        advertiser = id.split('/').last
+        rows = mysql.xquery("SELECT * FROM logs WHERE advertiser = ?", advertiser)
+        return {} if rows.size == 0
 
-        open(path, 'r') do |io|
-          io.flock File::LOCK_SH
-          io.read.each_line.map do |line|
-            ad_id, user, agent = line.chomp.split(?\t,3)
-            {ad_id: ad_id, user: user, agent: agent && !agent.empty? ? agent : :unknown}.merge(decode_user_key(user))
-          end.group_by { |click| click[:ad_id] }
-        end
+        #path = LOG_DIR.join(id.split('/').last)
+        #return {} unless path.exist?
+
+        rows.map do |row|
+          ad_id, user, agent = row['advertiser_id'], row['isuad'], row['useragent']
+          {ad_id: ad_id, user: user, agent: agent && !agent.empty? ? agent : :unknown}.merge(decode_user_key(user))
+        end.group_by { |click| click[:ad_id] }
+
+        # open(path, 'r') do |io|
+        #   io.flock File::LOCK_SH
+        #   io.read.each_line.map do |line|
+        #     ad_id, user, agent = line.chomp.split(?\t,3)
+        #     {ad_id: ad_id, user: user, agent: agent && !agent.empty? ? agent : :unknown}.merge(decode_user_key(user))
+        #   end.group_by { |click| click[:ad_id] }
+        # end
       end
     end
 
