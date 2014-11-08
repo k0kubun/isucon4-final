@@ -49,6 +49,17 @@ module Isucon4
       end
 
       def init_mysql
+        mysql.query(<<-EOS)
+          DROP TABLE IF EXISTS logs;
+          CREATE TABLE isucon.logs (
+            `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+            `advertiser` VARCHAR(255) DEFAULT NULL,
+            `advertiser_id` VARCHAR(255) DEFAULT NULL,
+            `isuad` VARCHAR(255) DEFAULT NULL,
+            `useragent` VARCHAR(255) DEFAULT NULL,
+            PRIMARY KEY (`id`)
+          ) ENGINE=InnoDB;
+        EOS
       end
 
       def ad_key(slot, id)
