@@ -38,3 +38,7 @@ sub vcl_deliver {
     # 
     # You can do accounting or modifying the final object here.
 }
+
+#sub vcl_miss {
+#   set req.http.host = req.http.X-ORIGINAL-HOST;
+#}
