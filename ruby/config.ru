@@ -1,4 +1,6 @@
 require_relative './app.rb'
-require 'newrelic_rpm'
+if ENV['RACK_ENV'] == 'production'
+  require 'newrelic_rpm'
+end
 
 run Isucon4::App
