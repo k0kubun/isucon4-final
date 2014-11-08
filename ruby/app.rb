@@ -57,7 +57,8 @@ module Isucon4
             `advertiser_id` VARCHAR(255) DEFAULT NULL,
             `isuad` VARCHAR(255) DEFAULT NULL,
             `useragent` VARCHAR(255) DEFAULT NULL,
-            PRIMARY KEY (`id`)
+            PRIMARY KEY (`id`),
+            KEY `index_advertiser` (`advertiser`)
           ) ENGINE=InnoDB;
         EOS
       end
