@@ -1,1 +1,1 @@
-unicorn: bundle exec unicorn -c unicorn_config.rb -p 8080
+unicorn: RACK_ENV=production bundle exec unicorn -c unicorn_config.rb -p 8080

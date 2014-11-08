@@ -5,6 +5,14 @@ require 'redis'
 require 'json'
 require 'rack/request'
 
+def development?
+  ENV['RACK_ENV'] != 'production'
+end
+
+if development?
+  require 'rack-lineprof'
+end
+
 module Isucon4
   class App < Sinatra::Base
     set :public_folder, "#{__dir__}/../public"
@@ -12,6 +20,10 @@ module Isucon4
     LOG_DIR = Pathname.new(__dir__).join('logs')
     ADS_DIR.mkpath unless ADS_DIR.exist?
     LOG_DIR.mkpath unless LOG_DIR.exist?
+
+    if development?
+      use Rack::Lineprof, profile: 'app.rb'
+    end
 
     helpers do
       def advertiser_id
