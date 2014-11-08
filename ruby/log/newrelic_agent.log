@@ -1,0 +1,14 @@
+# Logfile created on 2014-11-08 13:18:37 +0900 by logger.rb/44203
+[11/08/14 13:18:37 +0900 k0kubuns-MacBook-Air.local (8198)] INFO : Starting the New Relic agent in "development" environment.
+[11/08/14 13:18:37 +0900 k0kubuns-MacBook-Air.local (8198)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[11/08/14 13:18:37 +0900 k0kubuns-MacBook-Air.local (8198)] INFO : Reading configuration from config/newrelic.yml (/Users/k0kubun/src/github.com/k0kubun/isucon4-final/ruby)
+[11/08/14 13:18:37 +0900 k0kubuns-MacBook-Air.local (8198)] INFO : Environment: development
+[11/08/14 13:18:37 +0900 k0kubuns-MacBook-Air.local (8198)] INFO : No known dispatcher detected.
+[11/08/14 13:18:37 +0900 k0kubuns-MacBook-Air.local (8198)] INFO : Application: isucon4-final (Development)
+[11/08/14 13:18:37 +0900 k0kubuns-MacBook-Air.local (8198)] INFO : Installing Net instrumentation
+[11/08/14 13:18:37 +0900 k0kubuns-MacBook-Air.local (8198)] INFO : Installing Sinatra instrumentation
+[11/08/14 13:18:37 +0900 k0kubuns-MacBook-Air.local (8198)] INFO : Installing deferred Rack instrumentation
+[11/08/14 13:18:37 +0900 k0kubuns-MacBook-Air.local (8198)] INFO : Installing Rack::Builder middleware instrumentation
+[11/08/14 13:18:37 +0900 k0kubuns-MacBook-Air.local (8198)] INFO : Finished instrumentation
+[11/08/14 13:18:37 +0900 k0kubuns-MacBook-Air.local (8198)] INFO : Doing deferred dependency-detection before Rack startup
+[11/08/14 13:18:39 +0900 k0kubuns-MacBook-Air.local (8198)] INFO : Reporting to: https://rpm.newrelic.com/accounts/768811/applications/6920447
