@@ -1,2 +1,5 @@
 ads/
 logs/
+log/
+tmp/
+RackMultipart*
