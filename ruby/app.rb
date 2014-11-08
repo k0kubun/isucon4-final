@@ -348,11 +348,17 @@ module Isucon4
       init_mysql
 
       #LOG_DIR.children.each(&:delete)
-      system('rm -rf /tmp/movie')
-      system('mkdir /tmp/movie')
+      `curl http://10.11.54.170/mkdir`
+      `curl http://10.11.54.171/mkdir`
+      `curl http://10.11.54.172/mkdir`
 
       content_type 'text/plain'
       "OK"
+    end
+
+    get '/mkdir' do
+      system('rm -rf /tmp/movie')
+      system('mkdir -p /tmp/movie')
     end
   end
 end
