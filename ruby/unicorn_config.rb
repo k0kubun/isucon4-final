@@ -13,8 +13,8 @@ pid 'tmp/unicorn.pid'
 #logger Logger.new('log/unicorn.log')
 #set[:logger].level = Logger::ERROR
 
-stderr_path 'log/unicorn.stdout.log'
-stdout_path 'log/unicorn.stderr.log'
+# stderr_path 'log/unicorn.stdout.log'
+# stdout_path 'log/unicorn.stderr.log'
 
 GC.respond_to?(:copy_on_write_friendly=) and GC.copy_on_write_friendly = true
 
