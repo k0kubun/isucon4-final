@@ -7,7 +7,7 @@ worker_processes 4
 preload_app true
 
 # listen "127.0.0.1:3000"
-# listen "/tmp/sinatra.sock" # 絶対パスでなければならない点に注意！
+listen "/tmp/sinatra.sock" # 絶対パスでなければならない点に注意！
 pid 'tmp/unicorn.pid'
 
 #logger Logger.new('log/unicorn.log')
