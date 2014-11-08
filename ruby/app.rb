@@ -246,10 +246,19 @@ module Isucon4
         next {error: :not_found}.to_json
       end
 
-      open(LOG_DIR.join(ad['advertiser'].split('/').last), 'a') do |io|
-        io.flock File::LOCK_EX
-        io.puts([ad['id'], request.cookies['isuad'], request.user_agent].join(?\t))
-      end
+
+      advertiser_id = ad['advertiser'].split('/').last
+      ad_id = ad['id']
+      isuad = request.cookies['isuad']
+      user_agent = request.user_agent
+
+      mysql.xquery("INSERT INTO logs (advertiser, advertiser_id, isuad, useragent) VALUES (?,?,?,?)",
+        advertiser_id, ad_id, isuad, user_agent)
+
+      # open(LOG_DIR.join(ad['advertiser'].split('/').last), 'a') do |io|
+      #  io.flock File::LOCK_EX
+      #  io.puts([ad['id'], request.cookies['iscduad'], request.user_agent].join(?\t))
+      # end
 
       redirect ad['destination']
     end
