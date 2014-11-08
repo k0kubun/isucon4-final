@@ -4,7 +4,7 @@ require 'digest/sha2'
 require 'redis'
 require 'json'
 require 'rack/request'
-require 'mysql2'
+require 'mysql2-cs-bind'
 
 def development?
   ENV['RACK_ENV'] != 'production'
