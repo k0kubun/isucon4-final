@@ -40,6 +40,10 @@ module Isucon4
           end
       end
 
+      def local_redis
+        @local_redis ||= Redis.current
+      end
+
       def ad_key(slot, id)
         "isu4:ad:#{slot}-#{id}"
       end
@@ -136,7 +140,7 @@ module Isucon4
         'counter', url("/slots/#{slot}/ads/#{id}/count"),
         'redirect', url("/slots/#{slot}/ads/#{id}/redirect"),
       )
-      redis.set(asset_key(slot,id), asset.read)
+      local_redis.set(asset_key(slot, id), asset.read)
       redis.rpush(slot_key(slot), id)
       redis.sadd(advertiser_key(advertiser_id), key)
 
@@ -171,7 +175,7 @@ module Isucon4
       ad = get_ad(params[:slot], params[:id])
       if ad
         content_type ad['type'] || 'application/octet-stream'
-        data = redis.get(asset_key(params[:slot],params[:id])).b
+        data = local_redis.get(asset_key(params[:slot],params[:id])).b
 
         # Chrome sends us Range request even we declines...
         range = request.env['HTTP_RANGE'] 
