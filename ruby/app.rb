@@ -77,9 +77,6 @@ module Isucon4
 
         return nil if !ad || ad.empty?
         ad['impressions'] = ad['impressions'].to_i
-        ad['asset'] = url("/slots/#{slot}/ads/#{id}/asset")
-        ad['counter'] = url("/slots/#{slot}/ads/#{id}/count")
-        ad['redirect'] = url("/slots/#{slot}/ads/#{id}/redirect")
         ad['type'] = nil if ad['type'] == ""
 
         ad
@@ -129,6 +126,9 @@ module Isucon4
         'advertiser', advertiser_id,
         'destination', params[:destination],
         'impressions', 0,
+        'asset', url("/slots/#{slot}/ads/#{id}/asset"),
+        'counter', url("/slots/#{slot}/ads/#{id}/count"),
+        'redirect', url("/slots/#{slot}/ads/#{id}/redirect"),
       )
       redis.set(asset_key(slot,id), asset.read)
       redis.rpush(slot_key(slot), id)
