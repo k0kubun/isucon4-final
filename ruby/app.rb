@@ -31,7 +31,13 @@ module Isucon4
       end
 
       def redis
-        Redis.current
+        @redis ||=
+          if ENV['RACK_ENV'] == 'production'
+            # isucon2 private ip
+            Redis.new(host: '10.11.54.171', port: 6379)
+          else
+            Redis.current
+          end
       end
 
       def ad_key(slot, id)
