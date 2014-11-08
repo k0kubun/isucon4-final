@@ -4,6 +4,7 @@ require 'digest/sha2'
 require 'redis'
 require 'json'
 require 'rack/request'
+require 'mysql2'
 
 def development?
   ENV['RACK_ENV'] != 'production'
@@ -32,6 +33,22 @@ module Isucon4
 
       def redis
         Redis.current
+      end
+
+      def mysql
+        return @mysql if defined?(@mysql)
+
+        @mysql = Mysql2::Client.new(
+          host: '10.11.54.172',
+          port: 3306,
+          username: 'isucon',
+          password: 'bonnou2014',
+          database: 'isucon',
+          reconnect: true,
+        )
+      end
+
+      def init_mysql
       end
 
       def ad_key(slot, id)
@@ -168,7 +185,7 @@ module Isucon4
         data = redis.get(asset_key(params[:slot],params[:id])).b
 
         # Chrome sends us Range request even we declines...
-        range = request.env['HTTP_RANGE'] 
+        range = request.env['HTTP_RANGE']
         case
         when !range || range.empty?
           data
@@ -282,6 +299,8 @@ module Isucon4
       redis.keys('isu4:*').each_slice(1000).map do |keys|
         redis.del(*keys)
       end
+
+      init_mysql
 
       LOG_DIR.children.each(&:delete)
 
