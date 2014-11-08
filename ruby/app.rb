@@ -51,6 +51,9 @@ module Isucon4
       def init_mysql
         mysql.query(<<-EOS)
           DROP TABLE IF EXISTS logs;
+        EOS
+
+        mysql.query(<<-EOS)
           CREATE TABLE isucon.logs (
             `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
             `advertiser` VARCHAR(255) DEFAULT NULL,
